@@ -14,7 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "其他文件", "其他文�
 		.gitlab-ci.yml = .gitlab-ci.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.AspNetCore", "EasyNow.AspNetCore\EasyNow.AspNetCore.csproj", "{BFB60676-9698-47CB-999F-BF4E04F032F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.AspNetCore", "EasyNow.AspNetCore\EasyNow.AspNetCore.csproj", "{BFB60676-9698-47CB-999F-BF4E04F032F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.Dal", "EasyNow.Dal\EasyNow.Dal.csproj", "{5DA316FE-DD35-4E80-8E18-427E24BD1EE4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.Office", "EasyNow.Office\EasyNow.Office.csproj", "{39C98530-2334-4E8B-B547-D38F0411819A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.File", "EasyNow.File\EasyNow.File.csproj", "{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,6 +44,18 @@ Global
 		{BFB60676-9698-47CB-999F-BF4E04F032F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFB60676-9698-47CB-999F-BF4E04F032F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFB60676-9698-47CB-999F-BF4E04F032F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DA316FE-DD35-4E80-8E18-427E24BD1EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DA316FE-DD35-4E80-8E18-427E24BD1EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DA316FE-DD35-4E80-8E18-427E24BD1EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DA316FE-DD35-4E80-8E18-427E24BD1EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39C98530-2334-4E8B-B547-D38F0411819A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39C98530-2334-4E8B-B547-D38F0411819A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39C98530-2334-4E8B-B547-D38F0411819A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39C98530-2334-4E8B-B547-D38F0411819A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,6 +4,7 @@ using System.Reflection;
 using AspectCore.Configuration;
 using AspectCore.Extensions.Autofac;
 using Autofac;
+using Autofac.Core.Lifetime;
 using EasyCaching.Core.Configurations;
 using EasyCaching.Core.Interceptor;
 using EasyCaching.Interceptor.AspectCore;
@@ -36,6 +37,16 @@ namespace EasyNow.Utility.Extensions
 
                 configure.Interceptors.AddTyped<EasyCachingInterceptor>(all);
             });
+        }
+
+        public static ILifetimeScope GetRootScope(this ILifetimeScope lifetimeScope)
+        {
+            if(lifetimeScope is LifetimeScope scope)
+            {
+                return scope.RootLifetimeScope;
+            }
+
+            throw new NotImplementedException("未实现寻找root的方法");
         }
     }
 }
