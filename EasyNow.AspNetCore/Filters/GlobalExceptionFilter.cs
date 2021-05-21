@@ -11,7 +11,6 @@ namespace EasyNow.AspNetCore.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            var logger = context.HttpContext.RequestServices.GetService<ILoggerProvider>().CreateLogger(context.ActionDescriptor.DisplayName);
             var environment = context.HttpContext.RequestServices.GetService<IHostEnvironment>();
 
             // 标记该异常已被处理
@@ -31,6 +30,7 @@ namespace EasyNow.AspNetCore.Filters
             }
             else
             {
+                var logger = context.HttpContext.RequestServices.GetService<ILoggerProvider>().CreateLogger(context.ActionDescriptor.DisplayName);
                 logger.LogError(context.Exception, string.Empty);
                 context.Result = environment.IsDevelopment() ? new ObjectResult(new { code = false, msg = "请求发生错误,请稍后再试.", ex = context.Exception }) : new ObjectResult(new { code = false, msg = "请求发生错误,请稍后再试." });
             }
