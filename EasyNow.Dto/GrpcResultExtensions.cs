@@ -36,5 +36,16 @@ namespace EasyNow.Dto
                 Data = await task
             };
         }
+
+        /// <summary>
+        /// 获取GrpcResult的数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="grpcResultTask"></param>
+        /// <returns></returns>
+        public static async Task<T> GetData<T>(this Task<GrpcResult<T>> grpcResultTask)
+        {
+            return (await grpcResultTask).Data;
+        }
     }
 }

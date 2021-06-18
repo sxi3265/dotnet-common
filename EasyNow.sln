@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.Office", "EasyNow.O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.File", "EasyNow.File\EasyNow.File.csproj", "{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.EventBus", "EasyNow.EventBus\EasyNow.EventBus.csproj", "{FC5A7BFA-0A84-4C7E-B02B-6C0E1732D2E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B195E92-FF6E-4A17-A2B2-018E0CF1DDDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC5A7BFA-0A84-4C7E-B02B-6C0E1732D2E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC5A7BFA-0A84-4C7E-B02B-6C0E1732D2E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC5A7BFA-0A84-4C7E-B02B-6C0E1732D2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC5A7BFA-0A84-4C7E-B02B-6C0E1732D2E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
