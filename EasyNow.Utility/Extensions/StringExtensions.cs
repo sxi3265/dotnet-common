@@ -192,5 +192,19 @@ namespace EasyNow.Utility.Extensions
             }
             return null;
         }
+
+        public static string ToSha256String(this string data)
+        {
+            var bytes = Encoding.UTF8.GetBytes(data);
+            var hash = SHA256.Create().ComputeHash(bytes);
+ 
+            var builder = new StringBuilder();
+            foreach (var b in hash)
+            {
+                builder.Append(b.ToString("X2"));
+            }
+ 
+            return builder.ToString();
+        }
     }
 }
