@@ -1,7 +1,9 @@
-﻿namespace EasyNow.Service.Db
+﻿using System;
+
+namespace EasyNow.Service.Db
 {
-    public interface IUserResolver
+    public interface IUserResolver<T>
     {
-        T GetUserIdentity<T>(string user);
+        T GetUserIdentity(string user);
     }
 }

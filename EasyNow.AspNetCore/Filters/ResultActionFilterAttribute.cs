@@ -9,23 +9,23 @@ namespace EasyNow.AspNetCore.Filters
         {
             if (context.Result is ObjectResult objectResult)
             {
-                context.Result = new ObjectResult(new { code = true, msg = string.Empty, data = objectResult.Value });
+                context.Result = new ObjectResult(new { code = 0, msg = string.Empty, data = objectResult.Value });
             }
             else if (context.Result is EmptyResult)
             {
-                context.Result = new ObjectResult(new { code = true, msg = string.Empty });
+                context.Result = new ObjectResult(new { code = 0, msg = string.Empty });
             }
             else if (context.Result is ContentResult contentResult)
             {
-                context.Result = new ObjectResult(new { code = true, msg = string.Empty, data = contentResult.Content });
+                context.Result = new ObjectResult(new { code = 0, msg = string.Empty, data = contentResult.Content });
             }
             else if (context.Result is StatusCodeResult)
             {
-                context.Result = new ObjectResult(new { code = true,  msg = string.Empty });
+                context.Result = new ObjectResult(new { code = 0,  msg = string.Empty });
             }
             else if (context.Result is JsonResult jsonResult)
             {
-                context.Result = new ObjectResult(new { code = true, msg = string.Empty, data = jsonResult.Value });
+                context.Result = new ObjectResult(new { code = 0, msg = string.Empty, data = jsonResult.Value });
             }
         }
     }

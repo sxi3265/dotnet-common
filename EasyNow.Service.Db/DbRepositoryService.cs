@@ -26,14 +26,18 @@ namespace EasyNow.Service.Db
             _context = context;
         }
 
-        private TUser CurrentUser => LifetimeScope.Resolve<IUserResolver>()
-            .GetUserIdentity<TUser>(LifetimeScope.Resolve<IPrincipal>().Identity.Name);
+        private TUser CurrentUser => LifetimeScope.Resolve<IUserResolver<TUser>>()
+            .GetUserIdentity(LifetimeScope.Resolve<IPrincipal>().Identity.Name);
 
         private DbSet<T> DbSet => _context.Set<T>();
 
         public override async Task<TResult> AddAsync<TResult>(TResult model)
         {
             var entity = model.To<T>();
+            if (entity.Id == default)
+            {
+                entity.Id=Guid.NewGuid();
+            }
             if (entity is IAuditEntity<TUser> auditEntity)
             {
                 var utcNow = DateTime.UtcNow;

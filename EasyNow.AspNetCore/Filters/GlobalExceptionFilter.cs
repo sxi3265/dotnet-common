@@ -20,19 +20,19 @@ namespace EasyNow.AspNetCore.Filters
                 if (environment.IsDevelopment())
                 {
                     context.Result = new ObjectResult(new
-                        { code = false, msg = exception.Message, ex = exception,data=exception.Data });
+                        { code = -1, msg = exception.Message, ex = exception,data=exception.Data });
                 }
                 else
                 {
                     context.Result = new ObjectResult(new
-                        { code = false, msg = exception.Message, data = exception.Data });
+                        { code = -1, msg = exception.Message, data = exception.Data });
                 }
             }
             else
             {
                 var logger = context.HttpContext.RequestServices.GetService<ILoggerProvider>().CreateLogger(context.ActionDescriptor.DisplayName);
                 logger.LogError(context.Exception, string.Empty);
-                context.Result = environment.IsDevelopment() ? new ObjectResult(new { code = false, msg = "请求发生错误,请稍后再试.", ex = context.Exception }) : new ObjectResult(new { code = false, msg = "请求发生错误,请稍后再试." });
+                context.Result = environment.IsDevelopment() ? new ObjectResult(new { code = -1, msg = "请求发生错误,请稍后再试.", ex = context.Exception }) : new ObjectResult(new { code = -1, msg = "请求发生错误,请稍后再试." });
             }
         }
     }
