@@ -6,6 +6,7 @@
     <Company>EasyNow</Company>
     <Authors>sxi3265</Authors>
     <Version>1.0.1</Version>
+    <PackageVersion>1.0.2</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

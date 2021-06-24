@@ -1,9 +1,9 @@
-﻿namespace EasyNow.Dal
+﻿namespace EasyNow.Dto
 {
     /// <summary>
-    /// 软删实体
+    /// 软删
     /// </summary>
-    public interface ISoftDeleteEntity : IEntity
+    public interface ISoftDeleteDto : IDto
     {
         /// <summary>
         /// 已删除
