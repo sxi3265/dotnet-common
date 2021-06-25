@@ -14,6 +14,7 @@ using Elsa.Attributes;
 using Elsa.Persistence.EntityFramework.Core.Extensions;
 using Hangfire;
 using Hangfire.Storage.MySql;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -65,6 +66,12 @@ namespace EasyNow.Workflow.ApiEndpoints
             // Elsa API endpoints.
             services.AddElsaApiEndpoints();
 
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders =
+                    ForwardedHeaders.All;
+            });
+
             // Allow arbitrary client browser apps to access the API.
             // In a production environment, make sure to allow only origins you trust.
             services.AddCors(cors => cors.AddDefaultPolicy(policy => policy
@@ -85,6 +92,7 @@ namespace EasyNow.Workflow.ApiEndpoints
             }
 
             app
+                .UseForwardedHeaders()
                 .UseStaticFiles()
                 .UseCors()
                 .UseHttpActivities()
