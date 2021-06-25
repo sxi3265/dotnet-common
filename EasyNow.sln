@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.Grpc", "EasyNow.Grp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "其他文件", "其他文件", "{EC7F9CDC-40A1-435E-90A9-F1ADBFB1FA45}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		.gitlab-ci.yml = .gitlab-ci.yml
+		NuGet.Config = NuGet.Config
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.AspNetCore", "EasyNow.AspNetCore\EasyNow.AspNetCore.csproj", "{BFB60676-9698-47CB-999F-BF4E04F032F4}"
@@ -30,13 +32,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0D13CEB7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generator.Tests", "Generator.Tests\Generator.Tests.csproj", "{15EDB348-9866-4D3C-A4E1-48F7A504525D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.ApiClient.Getui", "EasyNow.ApiClient.Getui\EasyNow.ApiClient.Getui.csproj", "{DD1753B6-20B6-4B88-83BA-3F8E2548E502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.ApiClient.Getui", "EasyNow.ApiClient.Getui\EasyNow.ApiClient.Getui.csproj", "{DD1753B6-20B6-4B88-83BA-3F8E2548E502}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiClient.Getui.Tests", "ApiClient.Getui.Tests\ApiClient.Getui.Tests.csproj", "{01ED7E69-B383-428A-AE1C-9DC27AF24DCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiClient.Getui.Tests", "ApiClient.Getui.Tests\ApiClient.Getui.Tests.csproj", "{01ED7E69-B383-428A-AE1C-9DC27AF24DCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.Service", "EasyNow.Service\EasyNow.Service.csproj", "{10E70E64-CAD9-491D-B94E-17AF14BD1C99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.Service", "EasyNow.Service\EasyNow.Service.csproj", "{10E70E64-CAD9-491D-B94E-17AF14BD1C99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.Service.Db", "EasyNow.Service.Db\EasyNow.Service.Db.csproj", "{44DDDCAB-3C48-4A4F-966B-07801B549225}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.Service.Db", "EasyNow.Service.Db\EasyNow.Service.Db.csproj", "{44DDDCAB-3C48-4A4F-966B-07801B549225}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.Workflow.ApiEndpoints", "EasyNow.Workflow.ApiEndpoints\EasyNow.Workflow.ApiEndpoints.csproj", "{E2E8B901-D1F6-4124-849B-3A75475D1853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.Workflow.Mqtt", "EasyNow.Workflow.Mqtt\EasyNow.Workflow.Mqtt.csproj", "{D7D0D1FE-1796-49F4-9062-E84716DC880F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +106,14 @@ Global
 		{44DDDCAB-3C48-4A4F-966B-07801B549225}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44DDDCAB-3C48-4A4F-966B-07801B549225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44DDDCAB-3C48-4A4F-966B-07801B549225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2E8B901-D1F6-4124-849B-3A75475D1853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2E8B901-D1F6-4124-849B-3A75475D1853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2E8B901-D1F6-4124-849B-3A75475D1853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2E8B901-D1F6-4124-849B-3A75475D1853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7D0D1FE-1796-49F4-9062-E84716DC880F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D0D1FE-1796-49F4-9062-E84716DC880F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D0D1FE-1796-49F4-9062-E84716DC880F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D0D1FE-1796-49F4-9062-E84716DC880F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
