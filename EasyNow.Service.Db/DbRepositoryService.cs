@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -20,6 +21,8 @@ namespace EasyNow.Service.Db
     {
         public ILifetimeScope LifetimeScope { get; set; }
         private readonly DbContext _context;
+
+        private static Type ListType = typeof(List<>);
 
         public DbRepositoryService(DbContext context)
         {
@@ -55,7 +58,7 @@ namespace EasyNow.Service.Db
         {
             var q = this.DbSet.AsNoTracking();
             var properties = typeof(T).GetProperties();
-            var propertyDic = properties.ToDictionary(e => e.Name, e => e.PropertyType.Name);
+            var propertyDic = properties.ToDictionary(e => e.Name, e => e.PropertyType);
 
             if (query.Conditions != null && query.Conditions.Any())
             {
@@ -85,11 +88,23 @@ namespace EasyNow.Service.Db
                                 break;
                             case EOperator.In:
                                 queryList.Add($"@{paramList.Count}.Contains({prop.Key})");
-                                paramList.Add((condition.Value as IEnumerable<object>).Select(e=>e.ToString()).ToArray());
+                                var list=(IList)Activator.CreateInstance(ListType.MakeGenericType(prop.Value));
+                                (condition.Value as IEnumerable<object>)
+                                    .Select(e => Convert.ChangeType(e, prop.Value)).ToArray().Foreach(e =>
+                                    {
+                                        list.Add(e);
+                                    });
+                                paramList.Add(list);
                                 break;
                             case EOperator.Nin:
                                 queryList.Add($"!(@{paramList.Count}.Contains({prop.Key}))");
-                                paramList.Add((condition.Value as IEnumerable<object>).Select(e=>e.ToString()).ToArray());
+                                var list1=(IList)Activator.CreateInstance(ListType.MakeGenericType(prop.Value));
+                                (condition.Value as IEnumerable<object>)
+                                    .Select(e => Convert.ChangeType(e, prop.Value)).ToArray().Foreach(e =>
+                                    {
+                                        list1.Add(e);
+                                    });
+                                paramList.Add(list1);
                                 break;
                             case EOperator.Gt:
                                 queryList.Add($"{prop.Key} > @{paramList.Count}");
