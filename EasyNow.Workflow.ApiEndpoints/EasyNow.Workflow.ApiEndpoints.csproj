@@ -6,12 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Elsa" Version="2.1.0-preview.321" />
-    <PackageReference Include="Elsa.Activities.Http" Version="2.1.0-preview.321" />
-    <PackageReference Include="Elsa.Activities.Temporal.Hangfire" Version="2.1.0-preview.321" />
-    <PackageReference Include="Elsa.Designer.Components.Web" Version="2.1.0-preview.321" />
-    <PackageReference Include="Elsa.Persistence.EntityFramework.MySql" Version="2.1.0-preview.321" />
-    <PackageReference Include="Elsa.Server.Api" Version="2.1.0-preview.321" />
+    <PackageReference Include="Elsa" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Activities.Http" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Activities.Rebus" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Activities.Temporal.Hangfire" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Caching.Rebus" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Designer.Components.Web" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.DistributedLocking.Redis" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Persistence.EntityFramework.MySql" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Providers.Redis" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Rebus.RabbitMq" Version="2.1.0-preview.325" />
+    <PackageReference Include="Elsa.Server.Api" Version="2.1.0-preview.325" />
     <PackageReference Include="Hangfire.Storage.MySql" Version="2.1.0-beta" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.7">
       <PrivateAssets>all</PrivateAssets>

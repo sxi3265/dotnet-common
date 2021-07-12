@@ -11,12 +11,16 @@ using System.Transactions;
 using EasyNow.Workflow.Mqtt;
 using Elsa;
 using Elsa.Attributes;
+using Elsa.Caching.Rebus.Extensions;
+using Elsa.Extensions;
 using Elsa.Persistence.EntityFramework.Core.Extensions;
+using Elsa.Rebus.RabbitMq;
 using Hangfire;
 using Hangfire.Storage.MySql;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Rebus.Config;
 
 namespace EasyNow.Workflow.ApiEndpoints
 {
@@ -33,12 +37,19 @@ namespace EasyNow.Workflow.ApiEndpoints
         public void ConfigureServices(IServiceCollection services)
         {
             var elsaSection = Configuration.GetSection("Elsa");
-
+            services.AddRedis("103.127.126.204:30003,password=KwVRqDFTjZ7k60iT,abortConnect=false");
             // Elsa services.
             services
                 .AddElsa(elsa => elsa
+                    .UseRabbitMq("amqp://admin:tDVpZs4fEEwabekn@103.127.126.204:30002/")
+                    .UseServiceBus(context =>
+                    {
+                        context.Configurer.Transport(t => t.UseRabbitMq("amqp://admin:tDVpZs4fEEwabekn@103.127.126.204:30002/", "rebus"));
+                    })
+                    .UseRebusCacheSignal()
                     .UseEntityFrameworkPersistence(ef => ef.UseMySql(Configuration.GetConnectionString("Workflow"),
                         ServerVersion.AutoDetect(Configuration.GetConnectionString("Workflow"))))
+                    .ConfigureDistributedLockProvider(options=>options.UseRedisLockProvider(string.Empty))
                     .AddConsoleActivities()
                     .AddHttpActivities(elsaSection.GetSection("Server").Bind)
                     .AddHangfireTemporalActivities(hangfire =>
@@ -59,6 +70,7 @@ namespace EasyNow.Workflow.ApiEndpoints
                         hangfire.UseStorage(storage);
                     })
                     .AddJavaScriptActivities()
+                    .AddRebusActivities()
                     .AddMqttActivities()
                     .AddWorkflowsFrom<Startup>()
                 );

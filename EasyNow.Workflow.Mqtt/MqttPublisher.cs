@@ -65,7 +65,7 @@ namespace EasyNow.Workflow.Mqtt
             var message = new MqttApplicationMessageBuilder()
                 .WithTopic(this.Topic)
                 .WithPayload(this.Message)
-                .WithExactlyOnceQoS()
+                .WithAtLeastOnceQoS()
                 .WithRetainFlag()
                 .Build();
 

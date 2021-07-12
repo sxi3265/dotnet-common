@@ -44,6 +44,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNow.Workflow.ApiEndpoin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.Workflow.Mqtt", "EasyNow.Workflow.Mqtt\EasyNow.Workflow.Mqtt.csproj", "{D7D0D1FE-1796-49F4-9062-E84716DC880F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{5B0545B4-87A3-4307-B0F9-56041DC52555}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +116,10 @@ Global
 		{D7D0D1FE-1796-49F4-9062-E84716DC880F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7D0D1FE-1796-49F4-9062-E84716DC880F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7D0D1FE-1796-49F4-9062-E84716DC880F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B0545B4-87A3-4307-B0F9-56041DC52555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B0545B4-87A3-4307-B0F9-56041DC52555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B0545B4-87A3-4307-B0F9-56041DC52555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B0545B4-87A3-4307-B0F9-56041DC52555}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -121,6 +127,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{15EDB348-9866-4D3C-A4E1-48F7A504525D} = {0D13CEB7-56B2-42D0-8332-FD45C014FDF7}
 		{01ED7E69-B383-428A-AE1C-9DC27AF24DCF} = {0D13CEB7-56B2-42D0-8332-FD45C014FDF7}
+		{5B0545B4-87A3-4307-B0F9-56041DC52555} = {0D13CEB7-56B2-42D0-8332-FD45C014FDF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {313F83B6-33ED-4B77-B8DB-5626236F6B95}
