@@ -27,6 +27,17 @@ namespace EasyNow.AspNetCore
         }
 
         /// <summary>
+        /// 查询所有
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public virtual Task<TResult[]> QueryAll([NotNull,FromBody] QueryAllDto query)
+        {
+            return RepositoryService.QueryAllAsync<TResult>(query);
+        }
+
+        /// <summary>
         /// 分页查询
         /// </summary>
         /// <param name="query"></param>

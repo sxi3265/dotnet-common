@@ -10,6 +10,8 @@ namespace EasyNow.Service
     {
         Task<TResult> AddAsync<TResult>([NotNull]TResult model);
 
+        Task<TResult[]> QueryAllAsync<TResult>(QueryAllDto query);
+
         Task<PagedList<TResult>> QueryAsync<TResult>([NotNull] QueryDto query);
 
         Task<TResult> GetAsync<TResult>(Guid id);

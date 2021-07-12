@@ -4,6 +4,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>sxi3265</Authors>
+      <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
