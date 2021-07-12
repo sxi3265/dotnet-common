@@ -54,73 +54,76 @@ namespace EasyNow.Service.Db
             return entity.To<TResult>();
         }
 
-        public override Task<PagedList<TResult>> QueryAsync<TResult>(QueryDto query)
+        protected virtual (string expression,Dictionary<Guid,object> paramDic) BuildExpression(Expression expression,Dictionary<string,Type> propertyDic)
         {
-            var q = this.DbSet.AsNoTracking();
-            var properties = typeof(T).GetProperties();
-            var propertyDic = properties.ToDictionary(e => e.Name, e => e.PropertyType);
-
-            if (query.Conditions != null && query.Conditions.Any())
+            var queryList = new List<string>();
+            var paramDic = new Dictionary<Guid,object>();
+            foreach (var condition in expression.Conditions)
             {
-                var queryList = new List<string>();
-                var paramList = new List<object>();
-                
-                foreach (var condition in query.Conditions)
-                {
-                    var prop = propertyDic.FirstOrDefault(e =>
+                var prop = propertyDic.FirstOrDefault(e =>
                         e.Key.Equals(condition.Name, StringComparison.InvariantCultureIgnoreCase));
                     if (!string.IsNullOrEmpty(prop.Key))
                     {
+                        Guid paramKey;
                         switch (condition.Operator)
                         {
                             case EOperator.Eq:
-                                queryList.Add($"{prop.Key} = @{paramList.Count}");
-                                paramList.Add(condition.Value);
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"{prop.Key} = @{paramKey:D}");
+                                paramDic.Add(paramKey,condition.Value);
                                 break;
                             case EOperator.Neq:
-                                queryList.Add($"{prop.Key} != @{paramList.Count}");
-                                paramList.Add(condition.Value);
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"{prop.Key} != @{paramKey:D}");
+                                paramDic.Add(paramKey,condition.Value);
                                 break;
                             // todo 暂时无法实现真正的like,只能用contains替代
                             case EOperator.Like:
-                                queryList.Add($"{prop.Key}.Contains(@{paramList.Count})");
-                                paramList.Add(condition.Value);
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"{prop.Key}.Contains(@{paramKey:D})");
+                                paramDic.Add(paramKey,condition.Value);
                                 break;
                             case EOperator.In:
-                                queryList.Add($"@{paramList.Count}.Contains({prop.Key})");
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"@{paramKey:D}.Contains({prop.Key})");
                                 var list=(IList)Activator.CreateInstance(ListType.MakeGenericType(prop.Value));
                                 (condition.Value as IEnumerable<object>)
                                     .Select(e => Convert.ChangeType(e, prop.Value)).ToArray().Foreach(e =>
                                     {
                                         list.Add(e);
                                     });
-                                paramList.Add(list);
+                                paramDic.Add(paramKey,list);
                                 break;
                             case EOperator.Nin:
-                                queryList.Add($"!(@{paramList.Count}.Contains({prop.Key}))");
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"!(@{paramKey:D}.Contains({prop.Key}))");
                                 var list1=(IList)Activator.CreateInstance(ListType.MakeGenericType(prop.Value));
                                 (condition.Value as IEnumerable<object>)
                                     .Select(e => Convert.ChangeType(e, prop.Value)).ToArray().Foreach(e =>
                                     {
                                         list1.Add(e);
                                     });
-                                paramList.Add(list1);
+                                paramDic.Add(paramKey,list1);
                                 break;
                             case EOperator.Gt:
-                                queryList.Add($"{prop.Key} > @{paramList.Count}");
-                                paramList.Add(condition.Value);
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"{prop.Key} > @{paramKey:D}");
+                                paramDic.Add(paramKey,condition.Value);
                                 break;
                             case EOperator.Gte:
-                                queryList.Add($"{prop.Key} >= @{paramList.Count}");
-                                paramList.Add(condition.Value);
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"{prop.Key} >= @{paramKey:D}");
+                                paramDic.Add(paramKey,condition.Value);
                                 break;
                             case EOperator.Lt:
-                                queryList.Add($"{prop.Key} < @{paramList.Count}");
-                                paramList.Add(condition.Value);
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"{prop.Key} < @{paramKey:D}");
+                                paramDic.Add(paramKey,condition.Value);
                                 break;
                             case EOperator.Lte:
-                                queryList.Add($"{prop.Key} <= @{paramList.Count}");
-                                paramList.Add(condition.Value);
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"{prop.Key} <= @{paramKey:D}");
+                                paramDic.Add(paramKey,condition.Value);
                                 break;
                             case EOperator.Null:
                                 queryList.Add($"{prop.Key} == null");
@@ -129,14 +132,50 @@ namespace EasyNow.Service.Db
                                 queryList.Add($"{prop.Key} != null");
                                 break;
                         }
-                        
                     }
-                }
+            }
 
-                if (queryList.Any())
+            foreach (var item in expression.Expressions)
+            {
+                var result = BuildExpression(item, propertyDic);
+                if (string.IsNullOrEmpty(result.expression))
                 {
-                    q = q.Where(queryList.Join(" and "), paramList.ToArray());
+                    continue;
                 }
+                queryList.Add(result.expression);
+                result.paramDic.Foreach(e =>
+                {
+                    paramDic.Add(e.Key,e.Value);
+                });
+            }
+
+            if (queryList.Any())
+            {
+                return ($"({queryList.Join($" {expression.Operator.ToString().ToLower()} ")})", paramDic);
+            }
+
+            return (null, null);
+        }
+
+        public override Task<PagedList<TResult>> QueryAsync<TResult>(QueryDto query)
+        {
+            var q = this.DbSet.AsNoTracking();
+            var properties = typeof(T).GetProperties();
+            var propertyDic = properties.ToDictionary(e => e.Name, e => e.PropertyType);
+
+            var expressionResult = BuildExpression(query.Expression, propertyDic);
+            if (!string.IsNullOrEmpty(expressionResult.expression))
+            {
+                var paramList = new List<object>();
+                var expression = expressionResult.expression;
+
+                expressionResult.paramDic.Foreach(e =>
+                {
+                    expression=expression.Replace($"@{e.Key:D}", $"@{paramList.Count}");
+                    paramList.Add(e.Value);
+                });
+
+                q = q.Where(expression, paramList.ToArray());
             }
 
             var orderStr = string.Empty;

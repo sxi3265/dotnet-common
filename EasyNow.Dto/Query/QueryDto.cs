@@ -17,10 +17,10 @@ namespace EasyNow.Dto.Query
         public int PageSize { get; set; }
 
         /// <summary>
-        /// 条件
+        /// 表达式
         /// </summary>
-        [ProtoMember(3,Name = "conditions")]
-        public Condition[] Conditions { get; set; }
+        [ProtoMember(3,Name = "expression")]
+        public Expression Expression { get; set; }
 
         /// <summary>
         /// 排序条件
