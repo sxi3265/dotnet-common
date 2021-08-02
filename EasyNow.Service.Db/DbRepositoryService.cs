@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Security.Principal;
@@ -54,6 +55,28 @@ namespace EasyNow.Service.Db
             await this.DbSet.AddAsync(entity);
             await this._context.SaveChangesAsync();
             return entity.To<TResult>();
+        }
+
+        public override async Task<TResult[]> AddRangeAsync<TResult>(TResult[] models)
+        {
+            var entities = models.To<T[]>();
+            entities.Foreach(entity =>
+            {
+                if (entity.Id == default)
+                {
+                    entity.Id = Guid.NewGuid();
+                }
+                if (entity is IAuditEntity<TUser> auditEntity)
+                {
+                    var utcNow = DateTime.UtcNow;
+                    auditEntity.Creator = CurrentUser;
+                    auditEntity.Updater = CurrentUser;
+                    auditEntity.CreateTime = utcNow;
+                    auditEntity.UpdateTime = utcNow;
+                }
+            });
+            await this.DbSet.BulkInsertAsync(entities);
+            return entities.To<TResult[]>();
         }
 
         public override Task<TResult[]> QueryAllAsync<TResult>(QueryAllDto query)

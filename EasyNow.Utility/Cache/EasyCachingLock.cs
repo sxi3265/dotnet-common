@@ -52,11 +52,7 @@ namespace EasyNow.Utility.Cache
             key = GetKey(key);
 
             var n = 0;
-            if (!expireTimeSpan.HasValue)
-            {
-                // 默认5分钟过期
-                expireTimeSpan = TimeSpan.FromMinutes(5);
-            }
+            expireTimeSpan ??= TimeSpan.FromMinutes(5);
 
             while (!maxRetries.HasValue || n < maxRetries)
             {

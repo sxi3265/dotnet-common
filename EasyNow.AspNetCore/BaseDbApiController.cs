@@ -27,6 +27,17 @@ namespace EasyNow.AspNetCore
         }
 
         /// <summary>
+        /// 批量新增
+        /// </summary>
+        /// <param name="models"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public virtual Task<TResult[]> AddRange([NotNull,FromBody] TResult[] models)
+        {
+            return RepositoryService.AddRangeAsync(models);
+        }
+
+        /// <summary>
         /// 查询所有
         /// </summary>
         /// <param name="query"></param>

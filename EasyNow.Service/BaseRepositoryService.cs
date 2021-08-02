@@ -9,6 +9,8 @@ namespace EasyNow.Service
     {
         public abstract Task<TResult> AddAsync<TResult>(TResult model);
 
+        public abstract Task<TResult[]> AddRangeAsync<TResult>(TResult[] models);
+
         public abstract Task<TResult[]> QueryAllAsync<TResult>(QueryAllDto query);
 
         public abstract Task<PagedList<TResult>> QueryAsync<TResult>(QueryDto query);
