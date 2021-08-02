@@ -50,16 +50,6 @@ namespace EasyNow.Utility.Extensions
             {
                 return default;
             }
-            var sourceType = source.GetType();
-            var targetType = typeof(T);
-            if (UtilitySetup.Mapper.ConfigurationProvider.FindTypeMapFor(sourceType, targetType) == null)
-            {
-                if (sourceType == targetType || targetType.IsInstanceOfType(source))
-                {
-                    return (T)source;
-                }
-                throw new NotImplementedException($"未实现{sourceType.Name}到{targetType.Name}的转换");
-            }
             return opts==null?UtilitySetup.Mapper.Map<T>(source):UtilitySetup.Mapper.Map<T>(source,opts);
         }
 
@@ -84,14 +74,6 @@ namespace EasyNow.Utility.Extensions
         /// <returns></returns>
         public static object To(this object source,Type sourceType, Type targetType,Action<IMappingOperationOptions> opts)
         {
-            if (UtilitySetup.Mapper.ConfigurationProvider.FindTypeMapFor(sourceType, targetType) == null)
-            {
-                if (sourceType == targetType || targetType.IsInstanceOfType(source))
-                {
-                    return source;
-                }
-                throw new NotImplementedException($"未实现{sourceType.Name}到{targetType.Name}的转换");
-            }
             return opts == null
                 ? UtilitySetup.Mapper.Map(source, sourceType, targetType)
                 : UtilitySetup.Mapper.Map(source, sourceType, targetType, opts);
