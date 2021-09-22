@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using EasyNow.Collection;
 using EasyNow.Utility.Extensions;
 
 namespace EasyNow.Dto.Extensions

@@ -1,4 +1,4 @@
-﻿namespace EasyNow.Dto
+﻿namespace EasyNow.Collection
 {
     /// <summary>
     /// 分页接口

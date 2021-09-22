@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EasyNow.Service.Db
+﻿namespace EasyNow.Dal
 {
     public interface IUserResolver<T>
     {

@@ -1,4 +1,4 @@
-namespace EasyNow.Dto
+namespace EasyNow.Collection
 {
     /// <summary>
     /// ·µ»Ø½á¹û

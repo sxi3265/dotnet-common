@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using EasyNow.Collection;
+using ProtoBuf;
 
 namespace EasyNow.Dto.Query
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using EasyNow.Collection;
 using EasyNow.Dto;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Refit;

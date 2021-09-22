@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using EasyNow.Collection;
 using EasyNow.Dto;
 using EasyNow.Dto.Query;
 

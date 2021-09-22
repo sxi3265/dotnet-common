@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace EasyNow.Dto
+namespace EasyNow.Collection
 {
     /// <summary>
     /// GrpcResult扩展方法

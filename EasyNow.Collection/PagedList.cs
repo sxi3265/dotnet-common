@@ -4,7 +4,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using ProtoBuf;
 
-namespace EasyNow.Dto
+namespace EasyNow.Collection
 {
     [ProtoContract]
     public class PagedList<T>:IPagination

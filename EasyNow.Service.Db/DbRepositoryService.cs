@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Autofac;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using EasyNow.Collection;
 using EasyNow.Dal;
 using EasyNow.Dal.Extensions;
 using EasyNow.Dto;
@@ -23,7 +24,7 @@ namespace EasyNow.Service.Db
     public class DbRepositoryService<T,TUser>:BaseRepositoryService<T> where T:class,IIdKeyEntity
     {
         public ILifetimeScope LifetimeScope { get; set; }
-        private readonly DbContext _context;
+        protected readonly DbContext _context;
 
         private static Type ListType = typeof(List<>);
 
@@ -32,10 +33,10 @@ namespace EasyNow.Service.Db
             _context = context;
         }
 
-        private TUser CurrentUser => LifetimeScope.Resolve<IUserResolver<TUser>>()
+        protected TUser CurrentUser => LifetimeScope.Resolve<IUserResolver<TUser>>()
             .GetUserIdentity(LifetimeScope.Resolve<IPrincipal>().Identity.Name);
 
-        private DbSet<T> DbSet => _context.Set<T>();
+        protected DbSet<T> DbSet => _context.Set<T>();
 
         public override async Task<TResult> AddAsync<TResult>(TResult model)
         {
@@ -81,30 +82,37 @@ namespace EasyNow.Service.Db
 
         public override Task<TResult[]> QueryAllAsync<TResult>(QueryAllDto query)
         {
-            var q = this.DbSet.AsNoTracking();
+            return BuildQueryable(this.DbSet.AsNoTracking(),query.Expression,query.Orders).ProjectTo<TResult>(LifetimeScope.Resolve<IMapper>().ConfigurationProvider)
+                .ToArrayAsync();
+        }
+
+        protected virtual IQueryable<T> BuildQueryable<T>(IQueryable<T> query, Expression expression,
+            OrderCondition[] orders)
+        {
+            var q = query;
             var properties = typeof(T).GetProperties();
             var propertyDic = properties.ToDictionary(e => e.Name, e => e.PropertyType);
 
-            var expressionResult = BuildExpression(query.Expression, propertyDic);
+            var expressionResult = BuildExpression(expression, propertyDic);
             if (!string.IsNullOrEmpty(expressionResult.expression))
             {
                 var paramList = new List<object>();
-                var expression = expressionResult.expression;
+                var exp = expressionResult.expression;
 
                 expressionResult.paramDic.Foreach(e =>
                 {
-                    expression=expression.Replace($"@{e.Key:D}", $"@{paramList.Count}");
+                    exp=exp.Replace($"@{e.Key:D}", $"@{paramList.Count}");
                     paramList.Add(e.Value);
                 });
 
-                q = q.Where(expression, paramList.ToArray());
+                q = q.Where(exp, paramList.ToArray());
             }
 
             var orderStr = string.Empty;
-            if (query.Orders !=null&& query.Orders.Any())
+            if (orders !=null&& orders.Any())
             {
                 var orderList = new List<string>();
-                foreach (var condition in query.Orders)
+                foreach (var condition in orders)
                 {
                     var prop = propertyDic.FirstOrDefault(e =>
                         e.Key.Equals(condition.Name, StringComparison.InvariantCultureIgnoreCase));
@@ -126,8 +134,7 @@ namespace EasyNow.Service.Db
                 orderStr = "Id asc";
             }
 
-            return q.OrderBy(orderStr).ProjectTo<TResult>(LifetimeScope.Resolve<IMapper>().ConfigurationProvider)
-                .ToArrayAsync();
+            return q.OrderBy(orderStr);
         }
 
         protected virtual (string expression,Dictionary<Guid,object> paramDic) BuildExpression(Expression expression,Dictionary<string,Type> propertyDic)
@@ -245,51 +252,7 @@ namespace EasyNow.Service.Db
 
         public override Task<PagedList<TResult>> QueryAsync<TResult>(QueryDto query)
         {
-            var q = this.DbSet.AsNoTracking();
-            var properties = typeof(T).GetProperties();
-            var propertyDic = properties.ToDictionary(e => e.Name, e => e.PropertyType);
-
-            var expressionResult = BuildExpression(query.Expression, propertyDic);
-            if (!string.IsNullOrEmpty(expressionResult.expression))
-            {
-                var paramList = new List<object>();
-                var expression = expressionResult.expression;
-
-                expressionResult.paramDic.Foreach(e =>
-                {
-                    expression=expression.Replace($"@{e.Key:D}", $"@{paramList.Count}");
-                    paramList.Add(e.Value);
-                });
-
-                q = q.Where(expression, paramList.ToArray());
-            }
-
-            var orderStr = string.Empty;
-            if (query.Orders !=null&& query.Orders.Any())
-            {
-                var orderList = new List<string>();
-                foreach (var condition in query.Orders)
-                {
-                    var prop = propertyDic.FirstOrDefault(e =>
-                        e.Key.Equals(condition.Name, StringComparison.InvariantCultureIgnoreCase));
-                    if (!string.IsNullOrEmpty(prop.Key))
-                    {
-                        orderList.Add($"{prop.Key} {condition.Order.ToString().ToLower()}");
-                    }
-                }
-
-                if (orderList.Any())
-                {
-                    orderStr = orderList.Join(",");
-                }
-            }
-
-            // 此处如果没有传排序规则，则默认用Id升序
-            if (string.IsNullOrEmpty(orderStr))
-            {
-                orderStr = "Id asc";
-            }
-            return q.OrderBy(orderStr).ToPagedListAsync<T, TResult>(query);
+            return BuildQueryable(this.DbSet.AsNoTracking(),query.Expression,query.Orders).ToPagedListAsync<T, TResult>(query);
         }
 
         public override async Task<TResult> GetAsync<TResult>(Guid id)
@@ -311,11 +274,19 @@ namespace EasyNow.Service.Db
                 throw new MessageException("未找到数据");
             }
 
-            entity.CopyFrom(model);
             if (entity is IAuditEntity<TUser> auditEntity)
             {
                 auditEntity.Updater = CurrentUser;
                 auditEntity.UpdateTime = DateTime.UtcNow;
+                var creator = auditEntity.Creator;
+                var createTime = auditEntity.CreateTime;
+                model.CopyTo(entity);
+                auditEntity.CreateTime = createTime;
+                auditEntity.Creator = creator;
+            }
+            else
+            {
+                model.CopyTo(entity);
             }
             await this._context.SaveChangesAsync();
             return entity.To<TResult>();

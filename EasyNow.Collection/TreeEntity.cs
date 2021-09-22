@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ProtoBuf;
 
-namespace EasyNow.Dto
+namespace EasyNow.Collection
 {
     /// <summary>
     /// 树形实体

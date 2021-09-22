@@ -1,7 +1,7 @@
 ﻿using ProtoBuf;
 
 [assembly: CompatibilityLevel(CompatibilityLevel.Level300)]
-namespace EasyNow.Dto
+namespace EasyNow.Collection
 {
     /// <summary>
     /// GrpcResult

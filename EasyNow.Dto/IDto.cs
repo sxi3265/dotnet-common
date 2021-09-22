@@ -1,4 +1,7 @@
-﻿namespace EasyNow.Dto
+﻿using ProtoBuf;
+
+[assembly: CompatibilityLevel(CompatibilityLevel.Level300)]
+namespace EasyNow.Dto
 {
     /// <summary>
     /// Dto接口

@@ -1,6 +1,6 @@
 ﻿using ProtoBuf;
 
-namespace EasyNow.Dto
+namespace EasyNow.Collection
 {
     /// <summary>
     /// 分页
