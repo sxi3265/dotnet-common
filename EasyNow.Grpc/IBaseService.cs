@@ -16,7 +16,7 @@ namespace EasyNow.Grpc
         /// <param name="model"></param>
         /// <returns></returns>
         [OperationContract]
-        Task<TResult> Add([NotNull] TResult model);
+        Task<GrpcResult<TResult>> Add([NotNull] TResult model);
 
         /// <summary>
         /// 批量新增
@@ -24,7 +24,7 @@ namespace EasyNow.Grpc
         /// <param name="models"></param>
         /// <returns></returns>
         [OperationContract]
-        Task<TResult[]> AddRange([NotNull] TResult[] models);
+        Task<GrpcResult<TResult[]>> AddRange([NotNull] TResult[] models);
 
         /// <summary>
         /// 查询所有
@@ -32,7 +32,7 @@ namespace EasyNow.Grpc
         /// <param name="query"></param>
         /// <returns></returns>
         [OperationContract]
-        Task<TResult[]> QueryAll([NotNull] QueryAllDto query);
+        Task<GrpcResult<TResult[]>> QueryAll([NotNull] QueryAllDto query);
 
         /// <summary>
         /// 分页查询
@@ -40,7 +40,7 @@ namespace EasyNow.Grpc
         /// <param name="query"></param>
         /// <returns></returns>
         [OperationContract]
-        Task<PagedList<TResult>> Query([NotNull] QueryDto query);
+        Task<GrpcResult<PagedList<TResult>>> Query([NotNull] QueryDto query);
 
         /// <summary>
         /// 根据id查询
@@ -48,7 +48,7 @@ namespace EasyNow.Grpc
         /// <param name="req"></param>
         /// <returns></returns>
         [OperationContract]
-        Task<TResult> Get(GrpcReq<Guid> req);
+        Task<GrpcResult<TResult>> Get(GrpcReq<Guid> req);
 
         /// <summary>
         /// 更新
@@ -56,7 +56,7 @@ namespace EasyNow.Grpc
         /// <param name="model"></param>
         /// <returns></returns>
         [OperationContract]
-        Task<TResult> Update([NotNull] TResult model);
+        Task<GrpcResult<TResult>> Update([NotNull] TResult model);
 
         /// <summary>
         /// 删除
@@ -64,6 +64,6 @@ namespace EasyNow.Grpc
         /// <param name="req"></param>
         /// <returns></returns>
         [OperationContract]
-        Task<bool> Delete([NotNull] GrpcReq<Guid[]> req);
+        Task<GrpcResult<bool>> Delete([NotNull] GrpcReq<Guid[]> req);
     }
 }

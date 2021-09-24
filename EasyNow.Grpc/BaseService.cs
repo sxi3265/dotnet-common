@@ -21,9 +21,9 @@ namespace EasyNow.Grpc
         /// <param name="model"></param>
         /// <returns></returns>
         [OperationContract]
-        public virtual Task<TResult> Add([NotNull] TResult model)
+        public virtual Task<GrpcResult<TResult>> Add([NotNull] TResult model)
         {
-            return RepositoryService.AddAsync(model);
+            return RepositoryService.AddAsync(model).ToGrpcResult();
         }
 
         /// <summary>
@@ -32,9 +32,9 @@ namespace EasyNow.Grpc
         /// <param name="models"></param>
         /// <returns></returns>
         [OperationContract]
-        public virtual Task<TResult[]> AddRange([NotNull] TResult[] models)
+        public virtual Task<GrpcResult<TResult[]>> AddRange([NotNull] TResult[] models)
         {
-            return RepositoryService.AddRangeAsync(models);
+            return RepositoryService.AddRangeAsync(models).ToGrpcResult();
         }
 
         /// <summary>
@@ -43,9 +43,9 @@ namespace EasyNow.Grpc
         /// <param name="query"></param>
         /// <returns></returns>
         [OperationContract]
-        public virtual Task<TResult[]> QueryAll([NotNull] QueryAllDto query)
+        public virtual Task<GrpcResult<TResult[]>> QueryAll([NotNull] QueryAllDto query)
         {
-            return RepositoryService.QueryAllAsync<TResult>(query);
+            return RepositoryService.QueryAllAsync<TResult>(query).ToGrpcResult();
         }
 
         /// <summary>
@@ -54,9 +54,9 @@ namespace EasyNow.Grpc
         /// <param name="query"></param>
         /// <returns></returns>
         [OperationContract]
-        public virtual Task<PagedList<TResult>> Query([NotNull] QueryDto query)
+        public virtual Task<GrpcResult<PagedList<TResult>>> Query([NotNull] QueryDto query)
         {
-            return RepositoryService.QueryAsync<TResult>(query);
+            return RepositoryService.QueryAsync<TResult>(query).ToGrpcResult();
         }
 
         /// <summary>
@@ -65,9 +65,9 @@ namespace EasyNow.Grpc
         /// <param name="req"></param>
         /// <returns></returns>
         [OperationContract]
-        public virtual Task<TResult> Get(GrpcReq<Guid> req)
+        public virtual Task<GrpcResult<TResult>> Get(GrpcReq<Guid> req)
         {
-            return RepositoryService.GetAsync<TResult>(req.Data);
+            return RepositoryService.GetAsync<TResult>(req.Data).ToGrpcResult();
         }
 
         /// <summary>
@@ -76,9 +76,9 @@ namespace EasyNow.Grpc
         /// <param name="model"></param>
         /// <returns></returns>
         [OperationContract]
-        public virtual Task<TResult> Update([NotNull] TResult model)
+        public virtual Task<GrpcResult<TResult>> Update([NotNull] TResult model)
         {
-            return RepositoryService.UpdateAsync(model);
+            return RepositoryService.UpdateAsync(model).ToGrpcResult();
         }
 
         /// <summary>
@@ -87,9 +87,9 @@ namespace EasyNow.Grpc
         /// <param name="req"></param>
         /// <returns></returns>
         [OperationContract]
-        public virtual Task<bool> Delete([NotNull] GrpcReq<Guid[]> req)
+        public virtual Task<GrpcResult<bool>> Delete([NotNull] GrpcReq<Guid[]> req)
         {
-            return RepositoryService.DeleteAsync(req.Data);
+            return RepositoryService.DeleteAsync(req.Data).ToGrpcResult();
         }
     }
 }
