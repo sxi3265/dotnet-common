@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 
 namespace EasyNow.Grpc
 {
-    public interface IBaseService<TEntity, TResult>where TResult : IIdKeyDto
+    public interface IBaseService<TResult>where TResult : IIdKeyDto
     {
         /// <summary>
         /// 新增

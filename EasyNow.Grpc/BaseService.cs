@@ -10,7 +10,7 @@ using JetBrains.Annotations;
 
 namespace EasyNow.Grpc
 {
-    public abstract class BaseService<TEntity, TResult>:IBaseService<TEntity, TResult> where TResult : IIdKeyDto
+    public abstract class BaseService<TEntity, TResult>:IBaseService<TResult> where TResult : IIdKeyDto
     {
         public ILifetimeScope LifetimeScope { get; set; }
         protected IRepositoryService<TEntity> RepositoryService => LifetimeScope.Resolve<IRepositoryService<TEntity>>();
