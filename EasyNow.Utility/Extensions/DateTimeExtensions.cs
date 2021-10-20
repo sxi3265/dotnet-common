@@ -18,7 +18,7 @@ namespace EasyNow.Utility.Extensions
 
         public static DateTime ToDateTime(this long timeStamp)
         {
-            return StartTime.AddSeconds(timeStamp).ToLocalTime();
+            return StartTime.AddSeconds(timeStamp);
         }
     }
 }
