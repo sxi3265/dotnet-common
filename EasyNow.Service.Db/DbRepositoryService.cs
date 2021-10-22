@@ -276,11 +276,11 @@ namespace EasyNow.Service.Db
 
             if (entity is IAuditEntity<TUser> auditEntity)
             {
-                auditEntity.Updater = CurrentUser;
-                auditEntity.UpdateTime = DateTime.UtcNow;
                 var creator = auditEntity.Creator;
                 var createTime = auditEntity.CreateTime;
                 model.CopyTo(entity);
+                auditEntity.Updater = CurrentUser;
+                auditEntity.UpdateTime = DateTime.UtcNow;
                 auditEntity.CreateTime = createTime;
                 auditEntity.Creator = creator;
             }
