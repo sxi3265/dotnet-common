@@ -20,5 +20,19 @@ namespace EasyNow.Utility.Extensions
                 return sb.ToString();
             }
         }
+
+        /// <summary>
+        /// 获取SHA1
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        public static string ToSha1String(this byte[] bytes)
+        {
+            using var sha1 = SHA1.Create();
+            var s = sha1.ComputeHash(bytes);
+            var sb=new StringBuilder();
+            s.Foreach(e => { sb.Append(e.ToString("X2")); });
+            return sb.ToString();
+        }
     }
 }

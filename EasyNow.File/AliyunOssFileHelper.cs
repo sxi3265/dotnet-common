@@ -46,7 +46,29 @@ namespace EasyNow.File
 
         public string SaveFile(string filename, byte[] bytes, Dictionary<string, object> metadata = null, bool sameFileNotSave = true)
         {
-            throw new System.NotImplementedException();
+            var sha1Str = bytes.ToSha1String().ToLower();
+            if (sameFileNotSave)
+            {
+                if (_ossClient.DoesObjectExist(this._bucketName, sha1Str))
+                {
+                    return sha1Str;
+                }
+            }
+
+            var meta = new ObjectMetadata();
+            if (metadata != null && metadata.Any())
+            {
+                metadata.Foreach(e =>
+                {
+                    meta.UserMetadata.Add(e.Key,WebUtility.UrlEncode(e.Value.ToString()));
+                });
+            }
+            meta.AddHeader("filename",WebUtility.UrlEncode(filename));
+            meta.ContentDisposition = $"attachment; filename* = UTF-8''{WebUtility.UrlEncode(filename)}";
+            using var ms = new MemoryStream(bytes);
+            ms.Seek(0, SeekOrigin.Begin);
+            _ossClient.PutObject(this._bucketName, sha1Str, ms, meta);
+            return sha1Str;
         }
 
         public string[] SaveFiles((string filename, Stream stream, Dictionary<string, object> metadata)[] files, bool sameFileNotSave = true)
@@ -68,7 +90,12 @@ namespace EasyNow.File
 
             var ossObject = _ossClient.GetObject(this._bucketName, id);
             var bytes = new byte[ossObject.ContentLength];
-            ossObject.Content.Read(bytes, 0, bytes.Length);
+            var readCount = 0;
+            while (readCount<bytes.Length)
+            {
+                readCount+=ossObject.Content.Read(bytes, readCount, bytes.Length-readCount);
+            }
+            
             var fileName = "未命名文件";
             if (ossObject.Metadata.UserMetadata.ContainsKey("filename"))
             {
