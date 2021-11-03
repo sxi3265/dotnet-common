@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-using EasyNow.Collection;
 using EasyNow.Utility.Extensions;
 
-namespace EasyNow.Dto.Extensions
+namespace EasyNow.Collection.Extensions
 {
     public static class QueryableExtensions
     {

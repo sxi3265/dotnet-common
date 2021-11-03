@@ -33,5 +33,27 @@ namespace EasyNow.Utility.Extensions
                 return sb.ToString();
             }
         }
+
+        /// <summary>
+        /// 获取SHA1
+        /// </summary>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        public static string ToSha1String([NotNull] this Stream stream)
+        {
+            using var sha1 = SHA1.Create();
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+            var s = sha1.ComputeHash(stream);
+            var sb=new StringBuilder();
+            s.Foreach(e => { sb.Append(e.ToString("X2")); });
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+            return sb.ToString();
+        }
     }
 }

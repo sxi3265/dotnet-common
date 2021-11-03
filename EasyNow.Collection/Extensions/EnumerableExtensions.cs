@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using EasyNow.Collection;
 using EasyNow.Utility.Extensions;
 
-namespace EasyNow.Dto.Extensions
+namespace EasyNow.Collection.Extensions
 {
     /// <summary>
     /// The enumerable extensions.

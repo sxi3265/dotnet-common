@@ -11,9 +11,9 @@ namespace EasyNow.File
         /// <param name="filename">文件名</param>
         /// <param name="stream">文件流</param>
         /// <param name="metadata">元数据</param>
-        /// <param name="sameMd5NotSave">md5相同文件不再存储</param>
+        /// <param name="sameFileNotSave">相同文件不再存储</param>
         /// <returns>文件id</returns>
-        string SaveFile(string filename, Stream stream, Dictionary<string, object> metadata = null, bool sameMd5NotSave = true);
+        string SaveFile(string filename, Stream stream, Dictionary<string, object> metadata = null, bool sameFileNotSave = true);
 
         /// <summary>
         /// 保存文件
@@ -21,25 +21,25 @@ namespace EasyNow.File
         /// <param name="filename">文件名</param>
         /// <param name="bytes">文件字节数组</param>
         /// <param name="metadata">元数据</param>
-        /// <param name="sameMd5NotSave">md5相同文件不再存储</param>
+        /// <param name="sameFileNotSave">相同文件不再存储</param>
         /// <returns>文件id</returns>
-        string SaveFile(string filename, byte[] bytes, Dictionary<string, object> metadata = null, bool sameMd5NotSave = true);
+        string SaveFile(string filename, byte[] bytes, Dictionary<string, object> metadata = null, bool sameFileNotSave = true);
 
         /// <summary>
         /// 批量保存文件
         /// </summary>
         /// <param name="files">包括文件名、文件流和元数据的元组数组</param>
-        /// <param name="sameMd5NotSave">md5相同文件不再存储</param>
+        /// <param name="sameFileNotSave">相同文件不再存储</param>
         /// <returns>文件id数组(按照传入文件顺序返回)</returns>
-        string[] SaveFiles((string filename, Stream stream, Dictionary<string, object> metadata)[] files,bool sameMd5NotSave = true);
+        string[] SaveFiles((string filename, Stream stream, Dictionary<string, object> metadata)[] files,bool sameFileNotSave = true);
 
         /// <summary>
         /// 批量保存文件
         /// </summary>
         /// <param name="files">包括文件名、文件字节数组和元数据的元组数组</param>
-        /// <param name="sameMd5NotSave">md5相同文件不再存储</param>
+        /// <param name="sameFileNotSave">相同文件不再存储</param>
         /// <returns>文件id数组(按照传入文件顺序返回)</returns>
-        string[] SaveFiles((string filename, byte[] bytes, Dictionary<string, object> metadata)[] files,bool sameMd5NotSave = true);
+        string[] SaveFiles((string filename, byte[] bytes, Dictionary<string, object> metadata)[] files,bool sameFileNotSave = true);
 
         /// <summary>
         /// 获取文件信息
