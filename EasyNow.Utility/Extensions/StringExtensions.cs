@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using EasyNow.Utility.Tools;
+using JetBrains.Annotations;
 using Newtonsoft.Json;
 
 namespace EasyNow.Utility.Extensions
@@ -37,6 +38,22 @@ namespace EasyNow.Utility.Extensions
                 s.Foreach(e => { sb.Append(e.ToString("X2")); });
                 return sb.ToString();
             }
+        }
+
+        /// <summary>
+        /// 得到HMACSHA256结果
+        /// </summary>
+        /// <param name="plaintext"></param>
+        /// <param name="secret"></param>
+        /// <returns></returns>
+        public static string ToHmacSHA256(this string plaintext,[NotNull] string secret,Encoding encoding=null)
+        {
+            secret = secret ?? string.Empty;
+            encoding = encoding ?? Encoding.UTF8;
+            var keyBytes = encoding.GetBytes(secret);
+            var bytes = encoding.GetBytes(plaintext);
+            using var hmacsha256 = new HMACSHA256(keyBytes);
+            return Convert.ToBase64String(hmacsha256.ComputeHash(bytes));
         }
 
         /// <summary>
