@@ -5,7 +5,8 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Version>1.0.2</Version>
+    <LangVersion>Latest</LangVersion>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>

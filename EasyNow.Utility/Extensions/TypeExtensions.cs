@@ -41,6 +41,20 @@ namespace EasyNow.Utility.Extensions
         }
 
         /// <summary>
+        /// 获取类型默认值
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static object GetDefaultValue(this Type type)
+        {
+            if(type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            return null;
+        }
+
+        /// <summary>
         /// The get type of nullable.
         /// </summary>
         /// <param name="type">

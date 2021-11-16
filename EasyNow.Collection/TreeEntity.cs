@@ -9,7 +9,7 @@ namespace EasyNow.Collection
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TEntity"></typeparam>
     [ProtoContract]
-    public class TreeEntity<TKey,TEntity> where TKey:struct
+    public class TreeEntity<TKey,TEntity>
     {
         /// <summary>
         /// Id
