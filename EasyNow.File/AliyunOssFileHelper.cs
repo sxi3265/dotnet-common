@@ -87,7 +87,6 @@ namespace EasyNow.File
             {
                 return (null, null, null);
             }
-
             var ossObject = _ossClient.GetObject(this._bucketName, id);
             var bytes = new byte[ossObject.ContentLength];
             var readCount = 0;
@@ -118,7 +117,7 @@ namespace EasyNow.File
 
         public (byte[] bytes, string filename, Dictionary<string, object> metadata)[] GetFiles(string[] ids)
         {
-            throw new System.NotImplementedException();
+            return ids.Select(this.GetFile).ToArray();
         }
 
         public (Stream stream, string filename, Dictionary<string, object> metadata)[] GetFileStreams(string[] ids)
