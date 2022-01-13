@@ -154,29 +154,30 @@ namespace EasyNow.Service.Db
                     if (!string.IsNullOrEmpty(prop.Key))
                     {
                         Guid paramKey;
+                        var val = condition.Value.FromJson<dynamic>();
                         switch (condition.Operator)
                         {
                             case EOperator.Eq:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"{prop.Key} = @{paramKey:D}");
-                                paramDic.Add(paramKey, condition.Value);
+                                paramDic.Add(paramKey, val);
                                 break;
                             case EOperator.Neq:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"{prop.Key} != @{paramKey:D}");
-                                paramDic.Add(paramKey, condition.Value);
+                                paramDic.Add(paramKey, val);
                                 break;
                             // todo 暂时无法实现真正的like,只能用contains替代
                             case EOperator.Like:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"{prop.Key}.Contains(@{paramKey:D})");
-                                paramDic.Add(paramKey, condition.Value);
+                                paramDic.Add(paramKey, val);
                                 break;
                             case EOperator.In:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"@{paramKey:D}.Contains({prop.Key})");
                                 var list = (IList) Activator.CreateInstance(ListType.MakeGenericType(prop.Value));
-                                (condition.Value as IEnumerable<object>)
+                                (val as IEnumerable<object>)
                                     .Select(e => Convert.ChangeType(e, prop.Value)).ToArray().Foreach(e =>
                                     {
                                         list.Add(e);
@@ -187,7 +188,7 @@ namespace EasyNow.Service.Db
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"!(@{paramKey:D}.Contains({prop.Key}))");
                                 var list1 = (IList) Activator.CreateInstance(ListType.MakeGenericType(prop.Value));
-                                (condition.Value as IEnumerable<object>)
+                                (val as IEnumerable<object>)
                                     .Select(e => Convert.ChangeType(e, prop.Value)).ToArray().Foreach(e =>
                                     {
                                         list1.Add(e);
@@ -197,22 +198,22 @@ namespace EasyNow.Service.Db
                             case EOperator.Gt:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"{prop.Key} > @{paramKey:D}");
-                                paramDic.Add(paramKey, condition.Value);
+                                paramDic.Add(paramKey, val);
                                 break;
                             case EOperator.Gte:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"{prop.Key} >= @{paramKey:D}");
-                                paramDic.Add(paramKey, condition.Value);
+                                paramDic.Add(paramKey, val);
                                 break;
                             case EOperator.Lt:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"{prop.Key} < @{paramKey:D}");
-                                paramDic.Add(paramKey, condition.Value);
+                                paramDic.Add(paramKey, val);
                                 break;
                             case EOperator.Lte:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"{prop.Key} <= @{paramKey:D}");
-                                paramDic.Add(paramKey, condition.Value);
+                                paramDic.Add(paramKey, val);
                                 break;
                             case EOperator.Null:
                                 queryList.Add($"{prop.Key} == null");

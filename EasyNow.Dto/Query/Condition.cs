@@ -17,7 +17,7 @@ namespace EasyNow.Dto.Query
         /// 值
         /// </summary>
         [ProtoMember(2,Name="value")]
-        public object Value { get; set; }
+        public string Value { get; set; }
         /// <summary>
         /// 操作
         /// </summary>

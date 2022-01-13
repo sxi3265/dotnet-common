@@ -25,6 +25,19 @@ namespace EasyNow.Collection
         /// <summary>
         /// ToGrpcResult
         /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        public static Task<GrpcResult> ToGrpcResult(this Task task)
+        {
+            return task.ContinueWith(_ => new GrpcResult
+            {
+                Code = true
+            });
+        }
+
+        /// <summary>
+        /// ToGrpcResult
+        /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="task"></param>
         /// <returns></returns>
