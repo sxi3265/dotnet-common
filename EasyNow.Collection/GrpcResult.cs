@@ -13,7 +13,7 @@ namespace EasyNow.Collection
         /// Code
         /// </summary>
         [ProtoMember(1,Name = "code")]
-        public bool Code { get; set; }
+        public int Code { get; set; }
 
         /// <summary>
         /// Msg
@@ -33,7 +33,7 @@ namespace EasyNow.Collection
         /// Code
         /// </summary>
         [ProtoMember(1,Name = "code")]
-        public new bool Code
+        public new int Code
         {
             get => base.Code;
             set => base.Code = value;

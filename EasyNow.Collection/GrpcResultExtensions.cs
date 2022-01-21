@@ -17,7 +17,7 @@ namespace EasyNow.Collection
         {
             return new GrpcResult<T>
             {
-                Code = true,
+                Code = 0,
                 Data = data
             };
         }
@@ -27,12 +27,13 @@ namespace EasyNow.Collection
         /// </summary>
         /// <param name="task"></param>
         /// <returns></returns>
-        public static Task<GrpcResult> ToGrpcResult(this Task task)
+        public static async Task<GrpcResult> ToGrpcResult(this Task task)
         {
-            return task.ContinueWith(_ => new GrpcResult
+            await task;
+            return new GrpcResult
             {
-                Code = true
-            });
+                Code = 0
+            };
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace EasyNow.Collection
         {
             return new GrpcResult<T>
             {
-                Code = true,
+                Code = 0,
                 Data = await task
             };
         }

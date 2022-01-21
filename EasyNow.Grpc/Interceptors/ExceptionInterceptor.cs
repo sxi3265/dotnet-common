@@ -102,6 +102,7 @@ namespace EasyNow.Grpc.Interceptors
             {
                 return new GrpcResult
                 {
+                    Code = -1,
                     Msg = msgException!=null?msgException.Message:"执行失败"
                 } as TResponse;
             }
@@ -109,6 +110,7 @@ namespace EasyNow.Grpc.Interceptors
             if (typeof(TResponse).GetGenericTypeDefinition() == GrpcResultGenericType &&
                 Activator.CreateInstance<TResponse>() is GrpcResult grpcResult)
             {
+                grpcResult.Code = -1;
                 grpcResult.Msg = msgException != null ? msgException.Message : "执行失败";
                 return grpcResult as TResponse;
             }
