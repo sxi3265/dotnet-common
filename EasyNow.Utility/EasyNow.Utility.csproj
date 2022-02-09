@@ -5,8 +5,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>EasyNow</Company>
     <Authors>sxi3265</Authors>
-    <Version>1.0.13</Version>
-    <PackageVersion>1.0.13</PackageVersion>
+    <Version>1.0.14</Version>
+    <PackageVersion>1.0.14</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
