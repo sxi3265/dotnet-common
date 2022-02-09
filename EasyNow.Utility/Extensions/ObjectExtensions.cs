@@ -122,7 +122,7 @@ namespace EasyNow.Utility.Extensions
         /// <returns></returns>
         public static bool CanTo(this object source, Type sourceType, Type targetType)
         {
-            if (UtilitySetup.Mapper.ConfigurationProvider.FindTypeMapFor(sourceType, targetType) == null)
+            if (UtilitySetup.Mapper.ConfigurationProvider.BuildExecutionPlan(sourceType, targetType) == null)
             {
                 if (sourceType == targetType || targetType.IsInstanceOfType(source))
                 {

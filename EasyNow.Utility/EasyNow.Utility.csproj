@@ -5,14 +5,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>EasyNow</Company>
     <Authors>sxi3265</Authors>
-    <Version>1.0.12</Version>
-    <PackageVersion>1.0.12</PackageVersion>
+    <Version>1.0.13</Version>
+    <PackageVersion>1.0.13</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AspectCore.Extensions.Autofac" Version="2.2.0" />
     <PackageReference Include="Autofac" Version="6.3.0" />
-    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="EasyCaching.Interceptor.AspectCore" Version="1.4.1" />
     <PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
