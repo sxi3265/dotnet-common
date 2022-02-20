@@ -11,4 +11,10 @@ namespace EasyNow.Collection
         [ProtoMember(1, Name = "data")]
         public T Data { get; set; }
     }
+
+    [ProtoContract]
+    public class GrpcEmpty
+    {
+
+    }
 }

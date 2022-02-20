@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EasyNow.Collection\EasyNow.Collection.csproj" />
+    <ProjectReference Include="..\EasyNow.File\EasyNow.File.csproj" />
     <ProjectReference Include="..\EasyNow.Utility\EasyNow.Utility.csproj" />
   </ItemGroup>
 

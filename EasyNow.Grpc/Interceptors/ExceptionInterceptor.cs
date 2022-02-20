@@ -98,6 +98,12 @@ namespace EasyNow.Grpc.Interceptors
         private TResponse OnException<TResponse>(Exception e) where TResponse:class
         {
             var msgException = e as MessageException;
+
+            if (msgException == null)
+            {
+                Logger.LogError(e,"gRPC执行异常");
+            }
+
             if (typeof(TResponse) == GrpcResultType)
             {
                 return new GrpcResult
@@ -113,11 +119,6 @@ namespace EasyNow.Grpc.Interceptors
                 grpcResult.Code = -1;
                 grpcResult.Msg = msgException != null ? msgException.Message : "执行失败";
                 return grpcResult as TResponse;
-            }
-
-            if (msgException == null)
-            {
-                Logger.LogError(e,"gRPC执行异常");
             }
 
             return Activator.CreateInstance<TResponse>();
