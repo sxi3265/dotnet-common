@@ -561,26 +561,33 @@ namespace EasyNow.Office
 
         private string GetCellValue(ICell cell)
         {
-            switch (cell.CellType)
+            try
             {
-                case CellType.String:
-                    return cell.StringCellValue;
-                case CellType.Boolean:
-                    return cell.BooleanCellValue.ToString();
-                case CellType.Error:
-                    return cell.ErrorCellValue.ToString();
-                // 公式
-                case CellType.Formula:
-                    return cell.NumericCellValue.ToString();
-                case CellType.Numeric:
-                    if (DateUtil.IsCellDateFormatted(cell))
-                    {
-                        return cell.DateCellValue.ToString("yyyy-MM-dd HH:mm:ss");
-                    }
+                switch (cell.CellType)
+                {
+                    case CellType.String:
+                        return cell.StringCellValue;
+                    case CellType.Boolean:
+                        return cell.BooleanCellValue.ToString();
+                    case CellType.Error:
+                        return cell.ErrorCellValue.ToString();
+                    // 公式
+                    case CellType.Formula:
+                        return cell.NumericCellValue.ToString();
+                    case CellType.Numeric:
+                        if (DateUtil.IsCellDateFormatted(cell))
+                        {
+                            return cell.DateCellValue.ToString("yyyy-MM-dd HH:mm:ss");
+                        }
 
-                    return cell.NumericCellValue.ToString();
-                default:
-                    return string.Empty;
+                        return cell.NumericCellValue.ToString();
+                    default:
+                        return string.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException($"单元格值获取失败,位置:{cell.RowIndex},{cell.ColumnIndex}",ex);
             }
         }
 
