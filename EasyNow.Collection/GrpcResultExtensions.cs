@@ -57,7 +57,7 @@ namespace EasyNow.Collection
         /// <typeparam name="T"></typeparam>
         /// <param name="grpcResultTask"></param>
         /// <returns></returns>
-        public static async Task<T> GetData<T>(this Task<GrpcResult<T>> grpcResultTask)
+        public static async Task<T?> GetData<T>(this Task<GrpcResult<T>> grpcResultTask)
         {
             return (await grpcResultTask).Data;
         }

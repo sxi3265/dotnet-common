@@ -1,20 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageVersion>1.0.3</PackageVersion>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageVersion>1.0.4</PackageVersion>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\EasyNow.snk</AssemblyOriginatorKeyFile>
+    <PublicSign>true</PublicSign>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.DynamicLinq" Version="5.2.11" />
-    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="5.2.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.DynamicLinq" Version="6.2.19" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="6.14.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EasyNow.Collection\EasyNow.Collection.csproj" />
     <ProjectReference Include="..\EasyNow.Utility\EasyNow.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\EasyNow.snk">
+      <Link>EasyNow.snk</Link>
+    </None>
   </ItemGroup>
 
 </Project>

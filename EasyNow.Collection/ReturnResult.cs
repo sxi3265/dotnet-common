@@ -1,32 +1,32 @@
 namespace EasyNow.Collection
 {
     /// <summary>
-    /// ·µ»Ø½á¹û
+    /// è¿”å›ç»“æœ
     /// </summary>
     /// <typeparam name="TCode"></typeparam>
     public class ReturnResult<TCode>
     {
         /// <summary>
-        /// ½á¹û
+        /// ç»“æœ
         /// </summary>
-        public TCode Code { get; set; }
+        public TCode Code { get; set; } = default!;
         
         /// <summary>
-        /// ÏûÏ¢
+        /// æ¶ˆæ¯
         /// </summary>
-        public string Msg { get; set; }
+        public string? Msg { get; set; }
     }
 
     /// <summary>
-    /// ´øÊı¾İ·µ»Ø½á¹û
+    /// å¸¦æ•°æ®è¿”å›ç»“æœ
     /// </summary>
     /// <typeparam name="TCode"></typeparam>
     /// <typeparam name="TData"></typeparam>
     public class ReturnResult<TCode, TData> : ReturnResult<TCode>
     {
         /// <summary>
-        /// Êı¾İ
+        /// æ•°æ®
         /// </summary>
-        public TData Data { get; set; }
+        public TData? Data { get; set; }
     }
 }

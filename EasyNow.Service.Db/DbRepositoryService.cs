@@ -24,19 +24,19 @@ namespace EasyNow.Service.Db
     public class DbRepositoryService<T,TUser>:BaseRepositoryService<T> where T:class,IIdKeyEntity
     {
         public ILifetimeScope LifetimeScope { get; set; }
-        protected readonly DbContext _context;
+        protected readonly DbContext Context;
 
         private static Type ListType = typeof(List<>);
 
         public DbRepositoryService(DbContext context)
         {
-            _context = context;
+            Context = context;
         }
 
         protected TUser CurrentUser => LifetimeScope.Resolve<IUserResolver<TUser>>()
             .GetUserIdentity(LifetimeScope.Resolve<IPrincipal>().Identity.Name);
 
-        protected DbSet<T> DbSet => _context.Set<T>();
+        protected DbSet<T> DbSet => Context.Set<T>();
 
         public override async Task<TResult> AddAsync<TResult>(TResult model)
         {
@@ -54,7 +54,7 @@ namespace EasyNow.Service.Db
                 auditEntity.UpdateTime = utcNow;
             }
             await this.DbSet.AddAsync(entity);
-            await this._context.SaveChangesAsync();
+            await this.Context.SaveChangesAsync();
             return entity.To<TResult>();
         }
 
@@ -289,7 +289,7 @@ namespace EasyNow.Service.Db
             {
                 model.CopyTo(entity);
             }
-            await this._context.SaveChangesAsync();
+            await this.Context.SaveChangesAsync();
             return entity.To<TResult>();
         }
 

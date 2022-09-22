@@ -9,7 +9,7 @@ namespace EasyNow.Collection
         /// 数据
         /// </summary>
         [ProtoMember(1, Name = "data")]
-        public T Data { get; set; }
+        public T? Data { get; set; }
     }
 
     [ProtoContract]

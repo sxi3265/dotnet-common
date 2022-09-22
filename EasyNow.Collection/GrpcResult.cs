@@ -19,7 +19,7 @@ namespace EasyNow.Collection
         /// Msg
         /// </summary>
         [ProtoMember(2,Name = "msg")]
-        public string Msg { get; set; }
+        public string? Msg { get; set; }
     }
 
     /// <summary>
@@ -43,7 +43,7 @@ namespace EasyNow.Collection
         /// Msg
         /// </summary>
         [ProtoMember(2,Name = "msg")]
-        public new string Msg
+        public new string? Msg
         {
             get => base.Msg;
             set => base.Msg = value;
@@ -53,6 +53,6 @@ namespace EasyNow.Collection
         /// Data
         /// </summary>
         [ProtoMember(3,Name = "data")]
-        public TData Data { get; set; }
+        public TData? Data { get; set; }
     }
 }

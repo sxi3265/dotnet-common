@@ -15,8 +15,8 @@ namespace EasyNow.Collection
         /// <summary>
         /// Id
         /// </summary>
-        [ProtoMember(1,Name = "id")]
-        public TKey Id { get; set; }
+        [ProtoMember(1, Name = "id")]
+        public TKey Id { get; set; } = default!;
 
         /// <summary>
         /// 父Id
@@ -28,13 +28,13 @@ namespace EasyNow.Collection
         /// 文本
         /// </summary>
         [ProtoMember(3,Name = "text")]
-        public string Text { get; set; }
+        public string? Text { get; set; }
 
         /// <summary>
         /// 状态
         /// </summary>
         [ProtoMember(4,Name = "state")]
-        public string State { get; set; }
+        public string? State { get; set; }
 
         /// <summary>
         /// 是否勾选
@@ -46,13 +46,13 @@ namespace EasyNow.Collection
         /// 子节点
         /// </summary>
         [ProtoMember(6,Name = "children")]
-        public IEnumerable<TreeEntity<TKey, TEntity>> Children { get; set; }
+        public IEnumerable<TreeEntity<TKey, TEntity>>? Children { get; set; }
 
         /// <summary>
         /// 实体
         /// </summary>
         [ProtoMember(7,Name = "entity")]
-        public TEntity Entity { get; set; }
+        public TEntity? Entity { get; set; }
 
         /// <summary>
         /// 深度
