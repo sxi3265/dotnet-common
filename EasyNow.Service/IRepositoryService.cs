@@ -10,6 +10,7 @@ namespace EasyNow.Service
     public interface IRepositoryService<T>
     {
         Task<TResult> AddAsync<TResult>([System.Diagnostics.CodeAnalysis.NotNull]TResult model);
+        
         Task<TResult[]> AddRangeAsync<TResult>([System.Diagnostics.CodeAnalysis.NotNull]TResult[] models);
 
         Task<TResult[]> QueryAllAsync<TResult>(QueryAllDto query);
