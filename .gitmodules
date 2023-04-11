@@ -1,0 +1,21 @@
+[submodule "EasyNow.Envoy/proto/opentelemetry"]
+	path = EasyNow.Envoy/proto/opentelemetry
+	url = https://github.com/open-telemetry/opentelemetry-proto.git
+[submodule "EasyNow.Envoy/proto/envoy-api"]
+	path = EasyNow.Envoy/proto/envoy-api
+	url = https://github.com/envoyproxy/data-plane-api.git
+[submodule "EasyNow.Envoy/proto/googleapis"]
+	path = EasyNow.Envoy/proto/googleapis
+	url = https://github.com/googleapis/googleapis.git
+[submodule "EasyNow.Envoy/proto/protoc-gen-validate"]
+	path = EasyNow.Envoy/proto/protoc-gen-validate
+	url = https://github.com/envoyproxy/protoc-gen-validate.git
+[submodule "EasyNow.Envoy/proto/opencensus"]
+	path = EasyNow.Envoy/proto/opencensus
+	url = https://github.com/census-instrumentation/opencensus-proto.git
+[submodule "EasyNow.Envoy/proto/xds"]
+	path = EasyNow.Envoy/proto/xds
+	url = https://github.com/cncf/xds.git
+[submodule "EasyNow.Envoy/proto/prometheus"]
+	path = EasyNow.Envoy/proto/prometheus
+	url = https://github.com/prometheus/client_model.git

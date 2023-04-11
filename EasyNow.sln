@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.Image", "EasyNow.Im
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.Collection", "EasyNow.Collection\EasyNow.Collection.csproj", "{7CE67A1F-D0F8-4070-8967-5C08786413EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNow.Envoy", "EasyNow.Envoy\EasyNow.Envoy.csproj", "{34AA4463-525A-4D0C-9364-A8BE5C6D73A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -120,6 +122,10 @@ Global
 		{7CE67A1F-D0F8-4070-8967-5C08786413EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CE67A1F-D0F8-4070-8967-5C08786413EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CE67A1F-D0F8-4070-8967-5C08786413EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34AA4463-525A-4D0C-9364-A8BE5C6D73A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34AA4463-525A-4D0C-9364-A8BE5C6D73A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34AA4463-525A-4D0C-9364-A8BE5C6D73A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34AA4463-525A-4D0C-9364-A8BE5C6D73A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
