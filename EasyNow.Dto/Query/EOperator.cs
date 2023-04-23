@@ -14,9 +14,13 @@
         /// </summary>
         Neq,
         /// <summary>
-        /// 模糊匹配
+        /// 包含
         /// </summary>
-        Like,
+        Contain,
+        /// <summary>
+        /// 不包含
+        /// </summary>
+        NContain,
         /// <summary>
         /// 包含
         /// </summary>
