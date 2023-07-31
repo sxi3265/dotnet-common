@@ -168,9 +168,14 @@ namespace EasyNow.Service.Db
                                 paramDic.Add(paramKey, val);
                                 break;
                             // todo 暂时无法实现真正的like,只能用contains替代
-                            case EOperator.Like:
+                            case EOperator.Contain:
                                 paramKey = Guid.NewGuid();
                                 queryList.Add($"{prop.Key}.Contains(@{paramKey:D})");
+                                paramDic.Add(paramKey, val);
+                                break;
+                            case EOperator.NContain:
+                                paramKey = Guid.NewGuid();
+                                queryList.Add($"!({prop.Key}.Contains(@{paramKey:D}))");
                                 paramDic.Add(paramKey, val);
                                 break;
                             case EOperator.In:
